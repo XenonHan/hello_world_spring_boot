@@ -15,7 +15,7 @@ public class PersonService {
     private final PersonDao personDao;
 
     @Autowired
-    public PersonService(@Qualifier("fakeDao") PersonDao personDao) {
+    public PersonService(@Qualifier("postgres") PersonDao personDao) {
 
         this.personDao = personDao;
     }
@@ -32,11 +32,11 @@ public class PersonService {
         return personDao.selectPersonById(id);
     }
 
-    public boolean deletePeron(UUID id){
-       return personDao.deletePerson(id);
+    public void deletePeron(UUID id){
+       personDao.deletePerson(id);
     }
 
-    public boolean updatePerson(UUID id, Person person){
-        return personDao.updatePerson(id, person);
+    public void updatePerson(UUID id, Person person){
+        personDao.updatePerson(id, person);
     }
 }

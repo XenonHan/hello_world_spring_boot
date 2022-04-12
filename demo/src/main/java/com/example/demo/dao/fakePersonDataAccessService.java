@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Repository("fakeDao")
 @SuppressWarnings("unused")
@@ -26,28 +25,23 @@ public class fakePersonDataAccessService implements PersonDao {
     }
 
     @Override
-    public boolean deletePerson(UUID id) {
+    public void deletePerson(UUID id) {
         Optional<Person> deletePerson = selectPersonById(id);
-        if (deletePerson.isEmpty())
-            return false;
-        else
-            DB.remove(deletePerson.get());
-        return true;
+        deletePerson.ifPresent(DB::remove);
     }
 
     @Override
-    public boolean updatePerson(UUID id, Person person) {
-        return selectPersonById(id)
+    public void updatePerson(UUID id, Person person) {
+        selectPersonById(id)
                 .map(
                         p -> {
                             int indexOfPerson = DB.indexOf(p);
-                            if(indexOfPerson == -1)
+                            if (indexOfPerson == -1)
                                 return false;
                             DB.set(indexOfPerson, new Person(id, person.getName()));
                             return true;
                         }
-                )
-                .orElse(false);
+                );
     }
 
     @Override

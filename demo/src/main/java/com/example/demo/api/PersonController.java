@@ -37,8 +37,8 @@ public class PersonController {
     }
 
     @PutMapping(path = "{id}")
-    public String updatePerson(@PathVariable("id") UUID id, @Valid @NotBlank @RequestBody Person person) {
-        return personService.updatePerson(id, person) ? "success" : "fail";
+    public void updatePerson(@PathVariable("id") UUID id, @Valid @NotBlank @RequestBody Person person) {
+        personService.updatePerson(id, person);
     }
 
     @DeleteMapping(path = "{id}")

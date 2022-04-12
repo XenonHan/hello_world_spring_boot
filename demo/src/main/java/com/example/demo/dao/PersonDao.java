@@ -16,9 +16,9 @@ public interface PersonDao {
 
     List<Person> getAllPerson();
 
-    boolean deletePerson(UUID id);
+    void deletePerson(UUID id);
 
-    boolean updatePerson(UUID id, Person person);
+    void updatePerson(UUID id, Person person);
 
     Optional<Person> selectPersonById(UUID id);
 
