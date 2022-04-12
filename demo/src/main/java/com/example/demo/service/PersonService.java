@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PersonService {
     private final PersonDao personDao;
@@ -18,5 +20,9 @@ public class PersonService {
     @SuppressWarnings("UnusedReturnValue")
     public int addPerson(Person person){
         return this.personDao.insertPerson(person);
+    }
+
+    public List<Person> getAllPerson(){
+        return personDao.getAllPerson();
     }
 }
